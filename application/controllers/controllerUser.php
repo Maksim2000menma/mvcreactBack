@@ -4,22 +4,29 @@ class ControllerUser extends Controller
 {
 	function __construct()
 	{
-		session_start();
+		//session_start();
 		$this->model = new ModelUser();
 		$this->view = new View();
 	}
 
 	function actionIndex(){
-		if ( $_SESSION['role'] )
-		{
+		// if ( $_SESSION['role'] )
+		// {
+		// 	$data = $this->model->GetInfo();
+		// 	$this->view->generate('userView.php', 'templateView.php', $data);
+		// }
+		// else
+		// 	{
+		// 		session_destroy();
+		// 		Route::ErrorPage404();
+		// 	}
+
 			$data = $this->model->GetInfo();
-			$this->view->generate('userView.php', 'templateView.php', $data);
-		}
-		else
-			{
-				session_destroy();
-				Route::ErrorPage404();
-			}
+			 $rows = array();
+			 while($r = mysqli_fetch_assoc($data)) {
+	    	$rows[] = $r;
+			 }
+			 print_r(json_encode($rows));
 	}
 
 	function actionEdit(){
@@ -53,36 +60,44 @@ class ControllerUser extends Controller
 	}
 
 	function actionDelete(){
-		if ($_SESSION['fun_delete'] == 1){
-		//этот код повторяется надо будет исправить
-		$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
-		$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-		preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
-		$last_word = $matches[0];
-		//printf($last_word);//вывод id
+	// 	if ($_SESSION['fun_delete'] == 1){
+	// 	//этот код повторяется надо будет исправить
+	// 	$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
+	// 	$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+	// 	preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
+	// 	$last_word = $matches[0];
+	// 	//printf($last_word);//вывод id
+	//
+	// 	$data = $this->model->DeleteInfo($last_word);
+	// 	header('Location:/user/');
+	// }
+	// else {
+	// 		Route::ErrorPage404();
+	// }
 
-		$data = $this->model->DeleteInfo($last_word);
-		header('Location:/user/');
-	}
-	else {
-			Route::ErrorPage404();
-	}
+	$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
+	$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+	preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
+	$last_word = $matches[0];
+	//printf($last_word);//вывод id
+
+	$data = $this->model->DeleteInfo($last_word);
 }
 
 	function actionAllinfo(){
-		if ($_SESSION['fun_read'] == 1){
-		//этот код повторяется надо будет исправить
-		$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
-		$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-		preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
-		$last_word = $matches[0];
+	$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
+	$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+	preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
+	$last_word = $matches[0];
 
-		$data = $this->model->GetInfoId($last_word);
-		$this->view->generate('allinfoView.php', 'templateView.php',$data);
-	}
-	else {
-			Route::ErrorPage404();
-	}
+	$data = $this->model->GetInfoId($last_word);
+
+	 $rows = array();
+	 while($r = mysqli_fetch_assoc($data)) {
+		$rows[] = $r;
+	 }
+	 print_r(json_encode($rows));
+
 }
 
 	function actionCreate(){
