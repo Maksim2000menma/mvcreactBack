@@ -1,0 +1,120 @@
+﻿begin
+last_name: 1111
+
+first_name: 2222222
+
+login: 333333333
+
+password: 44444444
+
+description: 55555555
+
+address: 6666666666
+
+date_b: 2019-08-02
+
+------------------
+
+1111 
+
+------------------
+
+last_name: регистрация
+
+first_name: тест
+
+login: тест
+
+password: тест
+
+description: тест
+
+address: тест
+
+date_b: 2019-08-02
+
+------------------
+
+регистрация 
+
+------------------
+
+last_name: 111
+
+first_name: 111
+
+login: 2222
+
+password: 22222
+
+description: 3333
+
+address: 4444
+
+date_b: 2019-08-02
+
+------------------
+
+111 
+
+------------------
+
+last_name: 111   event.preventDefault();
+
+first_name: 111   event.preventDefault();
+
+login: 111   event.preventDefault();
+
+password: 111   event.preventDefault();
+
+description: 111   event.preventDefault();
+
+address: 111   event.preventDefault();
+
+date_b: 2019-08-01
+
+------------------
+
+111   event.preventDefault(); 
+
+------------------
+
+last_name: 111
+
+first_name: 11
+
+login: 11
+
+password: 11
+
+description: 11
+
+address: 11
+
+date_b: 2019-08-08
+
+------------------
+
+111 
+
+------------------
+
+last_name: ййййй
+
+first_name: ййй
+
+login: ййййййййй
+
+password: ййййййй
+
+description: ййййййййй
+
+address: ййййййййй
+
+date_b: 2019-08-01
+
+------------------
+
+ййййй 
+
+------------------
