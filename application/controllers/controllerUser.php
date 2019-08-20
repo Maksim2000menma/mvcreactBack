@@ -19,33 +19,27 @@ class ControllerUser extends Controller
 	}
 
 	function actionEdit(){
-		//if ($_SESSION['fun_edit'] == 1){
 		$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
 		$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
 		$last_word = $matches[0];
 
-		if(isset($_POST['submitapp'])){
-			$id = $_POST['id'];
-			$last_name = $_POST['last_name'];
-			$first_name = $_POST['first_name'];
-			$date_b = $_POST['date_b'];
-			$login = $_POST['login'];
-			$password = $_POST['password'];
-			$role_id = $_POST['role_id'];
-
-			$this->model->UpdateInfo($id, $last_name, $first_name , $date_b, $login, $password, $role_id);
-			//header('Location:/user/');
-			//$this->view->generate('editView.php', 'templateView.php');
+		if(isset($_GET['submitapp'])){
+			$id = $_GET['id'];
+			$last_name = $_GET['last_name'];
+			$first_name = $_GET['first_name'];
+			$date_b = $_GET['date_b'];
+			$login = $_GET['login'];
+			$password = $_GET['password'];
+			$role_id = $_GET['role_id'];
+			$data = $this->model->UpdateInfo($id, $last_name, $first_name , $date_b, $login, $password, $role_id);
+			print_r(json_encode($data));
 		}
 		else{
 			$data = $this->model->GetInfoId($last_word);
-			//$this->view->generate('editView.php', 'templateView.php',$data);
+			print_r(json_encode($data));
 		}
-	//}
-	//else {
-	//		Route::ErrorPage404();
-	//}
+
 	}
 
 	function actionDelete(){
@@ -53,9 +47,7 @@ class ControllerUser extends Controller
 		$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
 		$last_word = $matches[0];
-
 		$data = $this->model->DeleteInfo($last_word);
-		//header('Location:/user/');
 		print_r(json_encode($data));
 }
 
