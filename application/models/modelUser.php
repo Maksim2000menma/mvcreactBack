@@ -2,7 +2,6 @@
 
 class ModelUser extends Model
 {
-
 	public static function GetInfo(){
 		$connection = mysqli_connect("localhost", "root", "");
 		$select_db = mysqli_select_db($connection,'appusers');
@@ -35,10 +34,11 @@ class ModelUser extends Model
 
 	public static function DeleteInfo($id){
 		$connection = mysqli_connect("localhost", "root", "");
-		$select_db = mysqli_select_db($connection,'appusers');
-		mysqli_query($connection, "SET CHARACTER SET 'utf8'");
+    $select_db = mysqli_select_db($connection,'appusers');
+    mysqli_query($connection, "SET CHARACTER SET 'utf8'");
+		$query ="DELETE FROM userinfo WHERE id = '$id'";
 
-		$result=mysqli_query($connection, "DELETE FROM userinfo WHERE id='$id';");
+		$result = mysqli_query($connection, $query) or die("Ошибка " . mysqli_error($connection));
 		return $result;
 	}
 

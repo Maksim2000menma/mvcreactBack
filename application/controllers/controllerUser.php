@@ -10,17 +10,6 @@ class ControllerUser extends Controller
 	}
 
 	function actionIndex(){
-		// if ( $_SESSION['role'] )
-		// {
-		// 	$data = $this->model->GetInfo();
-		// 	$this->view->generate('userView.php', 'templateView.php', $data);
-		// }
-		// else
-		// 	{
-		// 		session_destroy();
-		// 		Route::ErrorPage404();
-		// 	}
-
 			$data = $this->model->GetInfo();
 			 $rows = array();
 			 while($r = mysqli_fetch_assoc($data)) {
@@ -30,7 +19,7 @@ class ControllerUser extends Controller
 	}
 
 	function actionEdit(){
-		if ($_SESSION['fun_edit'] == 1){
+		//if ($_SESSION['fun_edit'] == 1){
 		$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
 		$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
@@ -46,42 +35,28 @@ class ControllerUser extends Controller
 			$role_id = $_POST['role_id'];
 
 			$this->model->UpdateInfo($id, $last_name, $first_name , $date_b, $login, $password, $role_id);
-			header('Location:/user/');
-			$this->view->generate('editView.php', 'templateView.php');
+			//header('Location:/user/');
+			//$this->view->generate('editView.php', 'templateView.php');
 		}
 		else{
 			$data = $this->model->GetInfoId($last_word);
-			$this->view->generate('editView.php', 'templateView.php',$data);
+			//$this->view->generate('editView.php', 'templateView.php',$data);
 		}
-	}
-	else {
-			Route::ErrorPage404();
-	}
+	//}
+	//else {
+	//		Route::ErrorPage404();
+	//}
 	}
 
 	function actionDelete(){
-	// 	if ($_SESSION['fun_delete'] == 1){
-	// 	//этот код повторяется надо будет исправить
-	// 	$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
-	// 	$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-	// 	preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
-	// 	$last_word = $matches[0];
-	// 	//printf($last_word);//вывод id
-	//
-	// 	$data = $this->model->DeleteInfo($last_word);
-	// 	header('Location:/user/');
-	// }
-	// else {
-	// 		Route::ErrorPage404();
-	// }
+		$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
+		$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+		preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
+		$last_word = $matches[0];
 
-	$url = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 's' : '') . '://';//получение url ccskrb
-	$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-	preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
-	$last_word = $matches[0];
-	//printf($last_word);//вывод id
-
-	$data = $this->model->DeleteInfo($last_word);
+		$data = $this->model->DeleteInfo($last_word);
+		//header('Location:/user/');
+		print_r(json_encode($data));
 }
 
 	function actionAllinfo(){
