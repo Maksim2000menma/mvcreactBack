@@ -23,22 +23,45 @@ class ControllerUser extends Controller
 		$url = $url . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		preg_match("/[^\/]+$/", $url, $matches);//получение последнего символа в url
 		$last_word = $matches[0];
+		//
+		// if(isset($_GET['submitapp'])){
+		// 	$id = $_GET['id'];
+		// 	$last_name = $_GET['last_name'];
+		// 	$first_name = $_GET['first_name'];
+		// 	$date_b = $_GET['date_b'];
+		// 	$login = $_GET['login'];
+		// 	$password = $_GET['password'];
+		// 	$role_id = $_GET['role_id'];
+		// 	$data = $this->model->UpdateInfo($id, $last_name, $first_name , $date_b, $login, $password, $role_id);
+		// 	print_r(json_encode($data));
+		// }
+		// else{
+		// 	$data = $this->model->GetInfoId($last_word);
+		// 	print_r(json_encode($data));
+		// }
 
-		if(isset($_GET['submitapp'])){
-			$id = $_GET['id'];
-			$last_name = $_GET['last_name'];
-			$first_name = $_GET['first_name'];
-			$date_b = $_GET['date_b'];
-			$login = $_GET['login'];
-			$password = $_GET['password'];
-			$role_id = $_GET['role_id'];
-			$data = $this->model->UpdateInfo($id, $last_name, $first_name , $date_b, $login, $password, $role_id);
-			print_r(json_encode($data));
-		}
-		else{
-			$data = $this->model->GetInfoId($last_word);
-			print_r(json_encode($data));
-		}
+  $inputData = file_get_contents('php://input');//получение данных из front-end
+	$dataFront = json_decode($inputData, true);//формирование ассоциативного массива
+	//print_r($dataFront['submitapp']);
+
+			if(isset($dataFront['submitapp'])){
+				$id = $dataFront['id'];
+				$last_name = $dataFront['last_name'];
+				$first_name = $dataFront['first_name'];
+				$date_b = $dataFront['date_b'];
+				$login = $dataFront['login'];
+				$password = $dataFront['password'];
+				$role_id = $dataFront['role_id'];
+				$data = $this->model->UpdateInfo($id, $last_name, $first_name , $date_b, $login, $password, $role_id);
+				print_r(json_encode($data));
+			}
+			else{
+				$data = $this->model->GetInfoId($dataFront['id']);
+				print_r(json_encode($data));
+			}
+
+
+
 
 	}
 
