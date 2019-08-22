@@ -16,8 +16,9 @@ class ModelUser extends Model
 		$connection = mysqli_connect("localhost", "root", "");
 		$select_db = mysqli_select_db($connection,'appusers');
 		mysqli_query($connection, "SET CHARACTER SET 'utf8'");
+		$query = "SELECT * FROM userinfo WHERE id='$id';";
 
-		$result=mysqli_query($connection, "SELECT * FROM userinfo WHERE id='$id';");
+		$result = mysqli_query($connection, $query) or die("Ошибка " . mysqli_error($connection));
 		return $result;
 	}
 
