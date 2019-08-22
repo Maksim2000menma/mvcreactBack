@@ -23,11 +23,11 @@ class ModelUser extends Model
 	}
 
 
-	public static function UpdateInfo($id, $last_name, $first_name, $date_b, $login, $password, $role_id){
+	public static function UpdateInfo($id, $last_name, $first_name, $date_b, $login, $password, $description, $address, $role_id){
 		$connection = mysqli_connect("localhost", "root", "");
 		$select_db = mysqli_select_db($connection,'appusers');
 		mysqli_query($connection, "SET CHARACTER SET 'utf8'");
-		$query = "UPDATE userinfo SET first_name='$first_name', last_name='$last_name', date_b='$date_b', login='$login', password='$password', role_id='$role_id' WHERE id='$id';";
+		$query = "UPDATE userinfo SET first_name='$first_name', last_name='$last_name', date_b='$date_b', login='$login', password='$password', description='$description',address='$address', role_id='$role_id' WHERE id='$id';";
 
 		$result = mysqli_query($connection, $query) or die("Ошибка " . mysqli_error($connection));
 		return $result;

@@ -33,9 +33,11 @@ class ControllerUser extends Controller
 					$first_name = $dataFront['first_name'];
 					$date_b = $dataFront['date_b'];
 					$login = $dataFront['login'];
+					$description = $dataFront['description'];
+					$address = $dataFront['address'];
 					$password = $dataFront['password'];
 					$role_id = $dataFront['role_id'];
-					$data = $this->model->UpdateInfo($id, $last_name, $first_name , $date_b, $login, $password, $role_id);
+					$data = $this->model->UpdateInfo($id, $last_name, $first_name , $date_b, $login, $password, $description, $address, $role_id);
 					print_r(json_encode($data));
 				}
 				else{
@@ -60,12 +62,12 @@ class ControllerUser extends Controller
 			$last_word = $matches[0];
 
 			$data = $this->model->GetInfoId($last_word);
-			// $rows = array();
-			// while($r = mysqli_fetch_assoc($data)) {
-			// 	$rows[] = $r;
-			// }
-			//print_r(json_encode($rows));
-			print_r(mysqli_fetch_assoc($data));
+			$rows = array();
+			while($r = mysqli_fetch_assoc($data)) {
+				$rows[] = $r;
+			}
+			print_r(json_encode($rows));
+			//print_r(mysqli_fetch_assoc($data));
 
 	}
 
