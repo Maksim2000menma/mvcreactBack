@@ -6,8 +6,10 @@ class ModelUser extends Model
 		$connection = mysqli_connect("localhost", "root", "");
 		$select_db = mysqli_select_db($connection,'appusers');
 		mysqli_query($connection, "SET CHARACTER SET 'utf8'");
+		$query = "SELECT userinfo.id, userinfo.last_name, userinfo.first_name, userinfo.login, userinfo.password, role.role_name FROM userinfo
+		INNER JOIN role ON userinfo.role_id = role.id ORDER BY userinfo.id;";
 
-		$result=mysqli_query($connection, "SELECT * FROM userinfo;");
+		$result=mysqli_query($connection, $query) or die("Ошибка " . mysqli_error($connection));
 		return $result;
 	}
 
@@ -45,12 +47,12 @@ class ModelUser extends Model
 	}
 
 
-	public static function CreateInfo($last_name, $first_name, $login, $password, $description, $address, $date_b){
+	public static function CreateInfo($last_name, $first_name, $login, $password, $description, $address, $date_b, $role_id){
     $connection = mysqli_connect("localhost", "root", "");
     $select_db = mysqli_select_db($connection,'appusers');
     mysqli_query($connection, "SET CHARACTER SET 'utf8'");
 
-    			$query = "INSERT INTO userinfo (last_name, first_name, login, password, description, address, date_b) VALUES ('$last_name', '$first_name', '$login', '$password', '$description', '$address', '$date_b')";
+    			$query = "INSERT INTO userinfo (last_name, first_name, login, password, description, address, date_b, role_id) VALUES ('$last_name', '$first_name', '$login', '$password', '$description', '$address', '$date_b', '$role_id')";
     			$result = mysqli_query($connection, $query);
 
     			if($result){

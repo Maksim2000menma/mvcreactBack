@@ -67,35 +67,22 @@ class ControllerUser extends Controller
 				$rows[] = $r;
 			}
 			print_r(json_encode($rows));
-			//print_r(mysqli_fetch_assoc($data));
-
 	}
 
 	function actionCreate(){
-			if ($_SESSION['fun_create'] == 1){
-					if(isset($_POST['submitadd'])){
-						$last_name = $_POST['last_name'];
-						$first_name = $_POST['first_name'];
-						$login = $_POST['login'];
-						$password = $_POST['password'];
-						$description = $_POST['description'];
-						$address = $_POST['address'];
-						$date_b = $_POST['date_b'];
+			$dataJSON = file_get_contents('php://input');
+			$json = json_decode($dataJSON, TRUE);
 
-						$this->model->CreateInfo($last_name, $first_name, $login, $password, $description, $address, $date_b);
-						header('Location:/user/');
-					}
-					$this->view->generate('createView.php', 'templateView.php');
-				}
-				else {
-						Route::ErrorPage404();
-				}
-}
+			 $last_name = $json[last_name];
+			 $first_name = $json[first_name];
+			 $login = $json[login];
+			 $password = $json[password];
+			 $description = $json[description];
+			 $address = $json[address];
+			 $date_b = $json[date_b];
+			 $role_id = $json[role_id];
 
-
-
-
-
-
+			 $this->model->CreateInfo($last_name, $first_name, $login, $password, $description, $address, $date_b, $role_id);
+		}
 
 }

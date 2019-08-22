@@ -32,14 +32,8 @@ class ControllerRegistration extends Controller
 
 	function actionTest(){
 	// $this->view->generate('userView.php', 'templateView.php', $data);
-	$dataJSON = file_get_contents('php://input');
-	$json = json_decode($dataJSON, TRUE);
-	foreach ($json as $key => $value){
-	       file_put_contents('test.txt', PHP_EOL . "$key: $value\n", FILE_APPEND);
-	   };
-	   file_put_contents('test.txt', PHP_EOL . "------------------\n", FILE_APPEND);
-	   file_put_contents('test.txt', PHP_EOL . "$json[last_name] \n", FILE_APPEND);
-	   file_put_contents('test.txt', PHP_EOL . "------------------\n", FILE_APPEND);
+		$dataJSON = file_get_contents('php://input');
+		$json = json_decode($dataJSON, TRUE);
 
 		 $last_name = $json[last_name];
 		 $first_name = $json[first_name];
