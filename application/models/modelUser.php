@@ -28,7 +28,6 @@ class ModelUser extends Model
 	public static function UpdateInfo($id, $last_name, $first_name, $date_b, $login, $password, $description, $address, $role_id){
 		$connection = OpenCon();
 		$query = "UPDATE userinfo SET first_name='$first_name', last_name='$last_name', date_b='$date_b', login='$login', password='$password', description='$description',address='$address', role_id='$role_id' WHERE id='$id';";
-
 		$result = mysqli_query($connection, $query) or die("Ошибка " . mysqli_error($connection));
 		return $result;
 	}
@@ -37,7 +36,6 @@ class ModelUser extends Model
 	public static function DeleteInfo($id){
 		$connection = OpenCon();
 		$query ="DELETE FROM userinfo WHERE id = '$id'";
-
 		$result = mysqli_query($connection, $query) or die("Ошибка " . mysqli_error($connection));
 		return $result;
 	}
@@ -45,17 +43,16 @@ class ModelUser extends Model
 
 	public static function CreateInfo($last_name, $first_name, $login, $password, $description, $address, $date_b, $role_id){
 		$connection = OpenCon();
+		$query = "INSERT INTO userinfo (last_name, first_name, login, password, description, address, date_b, role_id) VALUES ('$last_name', '$first_name', '$login', '$password', '$description', '$address', '$date_b', '$role_id')";
+    $result = mysqli_query($connection, $query);
 
-    			$query = "INSERT INTO userinfo (last_name, first_name, login, password, description, address, date_b, role_id) VALUES ('$last_name', '$first_name', '$login', '$password', '$description', '$address', '$date_b', '$role_id')";
-    			$result = mysqli_query($connection, $query);
-
-    			if($result){
-    				$smsg="Добавление прошло успешно";
-    			echo $smsg;
-    		}
-    		else {
-    			$fsmsg="Ошибка";
-    		}
+		if($result){
+    	$smsg="Добавление прошло успешно";
+    	echo $smsg;
+    }
+    else {
+    	$fsmsg="Ошибка";
+    }
 	}
 
 
