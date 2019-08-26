@@ -1,12 +1,10 @@
 <?php
+include($_SERVER['DOCUMENT_ROOT'] . "/application/core/Db.php");
 
 class ModelRegistration extends Model
 {
 	public static function CreateUser($last_name, $first_name, $login, $password, $description, $address, $date_b){
-
-    $connection = mysqli_connect("localhost", "root", "");
-    $select_db = mysqli_select_db($connection,'appusers');
-    mysqli_query($connection, "SET CHARACTER SET 'utf8'");
+		$connection = OpenCon();
 
     			//$last_name = $_POST['last_name'];
 

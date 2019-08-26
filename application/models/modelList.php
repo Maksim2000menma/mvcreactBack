@@ -1,12 +1,12 @@
 <?php
-
+//include 'Db.php';
+include($_SERVER['DOCUMENT_ROOT'] . "/application/core/Db.php");
 class ModelList extends Model
 {
 
 	public static function GetInfo(){
-		$connection = mysqli_connect("localhost", "root", "");
-		$select_db = mysqli_select_db($connection,'appusers');
-		mysqli_query($connection, "SET CHARACTER SET 'utf8'");
+
+		$connection = OpenCon();
 
 		$result=mysqli_query($connection, "SELECT * FROM userinfo;");
 		//$row=mysqli_fetch_array($result);

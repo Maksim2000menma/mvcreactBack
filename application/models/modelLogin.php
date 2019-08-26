@@ -1,12 +1,11 @@
 <?php
+include($_SERVER['DOCUMENT_ROOT'] . "/application/core/Db.php");
 
 class ModelLogin extends Model
 {
 
   public static function GetLogin($login, $password){
-    $connection = mysqli_connect("localhost", "root", "");
-    $select_db = mysqli_select_db($connection,'appusers');
-    mysqli_query($connection, "SET CHARACTER SET 'utf8'");
+    $connection = OpenCon();
 
     //выборка необходимых данных и связывание таблиц
     $query = "SELECT  userinfo.first_name, userinfo.date_b, userinfo.login, userinfo.password, userinfo.description, userinfo.address, userinfo.role_id,
@@ -15,7 +14,7 @@ class ModelLogin extends Model
     INNER JOIN permission ON role.id = permission.id_role
     INNER JOIN fun_permission ON permission.id = fun_permission.permission_id
     WHERE (login = '$login') AND (password = '$password')";
-    
+
     $result=mysqli_query($connection, $query) or die("Ошибка " . mysqli_error($connection));
 
 

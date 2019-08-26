@@ -1,18 +1,18 @@
 <?php
+function OpenCon()
+ {
+ $dbhost = "localhost";
+ $dbuser = "root";
+ $dbpass = "";
+ $db = "appusers";
+ $conn = new mysqli($dbhost, $dbuser, $dbpass,$db) or die("Connect failed: %s\n". $conn -> error);
 
-class dbconnect{
+ return $conn;
+ }
 
-  public function connect(){
-    $connection = mysqli_connect("localhost", "root", "");
-    $select_db = mysqli_select_db($connection,'appusers');
-    mysqli_query($connection, "SET CHARACTER SET 'utf8'");
-
-    return $connection;
-
-
-}
-
-
-}
+function CloseCon($conn)
+ {
+ $conn -> close();
+ }
 
 ?>
