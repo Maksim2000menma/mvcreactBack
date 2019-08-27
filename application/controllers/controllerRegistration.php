@@ -46,7 +46,7 @@ class ControllerRegistration extends Controller
 		$json = json_decode($dataJSON, TRUE);
 		$login = $json[login];
 		$password = $json[password];
-		if($login && $password){
+		if(($login != '') && ($password != '')){
 			$info = $this->model->GetLogin($login, $password);
 			$row = mysqli_fetch_array($info, MYSQLI_ASSOC);
 
